@@ -1,0 +1,109 @@
+<md-dialog>
+    <md-toolbar  class="md-primary">
+        <div class="md-toolbar-tools md-primary">
+            <h2 translate>POPUP_TITLE</h2>
+            <!--<h2 translate="VARIABLE_REPLACEMENT" translate-values="{ name: 'PascalPrecht' }"></h2>-->
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-icon="close" aria-label="android "></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash)" ></flash-message>
+    <md-dialog-content style="min-width:700px;height:480px; padding:20px 20px 20px 20px;">
+        <div layout="column">
+             <form name="addNewStepForm">
+                <div ng-hide="stepsCurrent.length > 0">
+                    <h4>{{ "TITLE" | translate }}</h4>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>{{ "WORKFLOWNAME" | translate }}</label>
+                        <input name="flowName" type="text" ng-model="workflowName" ng-class="{true: 'invalid'}[addNewStepForm.flowName.$error.required && formSubmitted]" ng-required="true">
+
+                        <!--div ng-messages="addNewStepForm.flowName.$error.required">
+                            <div ng-message="required">This field is required</div>
+                        </div-->
+                    </md-input-container>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>{{ "WORKFLOWDESCRIPTION" | translate }}</label>
+                        <input name="flowDescription" type="text" ng-model="workflowDescription" ng-class="{true: 'invalid'}[addNewStepForm.flowDescription.$error.required && formSubmitted]" ng-required="true">
+                    </md-input-container>
+                    <div layout="row" layout-wrap>
+                        <div flex="50">               
+                            <md-input-container class="md-icon-float md-block">
+                                <label>{{ "WORKFLOW_ADMINS" | translate }}</label>
+                                <md-select name="flowAdmin" ng-model="workflowAdmin" ng-class="{true: 'invalid'}[addNewStepForm.flowAdmin.$error.required && formSubmitted]" ng-required="true">
+                                    <md-select-label>{{ "WORKFLOW_ADMINS" | translate }}</md-select-label>
+                                    <md-option ng-repeat="n in workflowAdmins" ng-value="n">{{ n.name}}</md-option>
+                                </md-select>
+                            </md-input-container></div>
+                        <div flex="50">
+                            <md-input-container class="md-icon-float md-block">
+                                <label>{{ "WORKFLOW_TYPE" | translate }}</label>
+                                <md-select ng-model="workflowType" required>
+                                    <md-select-label>{{ "WORKFLOW_TYPE" | translate }}</md-select-label>
+                                    <md-option ng-repeat="n in workflowTypes" ng-value="n">{{ n.description}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>     
+                <!--[$separator$]-->
+                <h4 ng-hide="stepsCurrent.length == 0">{{ "ETAPE_SUBLIME" | translate }}</h4>
+                <md-select ng-hide="stepsCurrent.length == 0" flex ng-model="StepPosition" required>
+                    <md-option value="1">{{ "ETAPE_PREV" | translate }}</md-option>
+                    <md-option value="2" >{{ "ETAPE_NEXT" | translate }}</md-option>
+                </md-select>
+                <h4>{{ "ETAPE_TITLE" | translate }}</h4>
+                <div ng-hide="StepPosition == 2">
+                    <md-select name="etape" ng-model="ck_selected" ng-class="{true: 'invalid'}[addNewStepForm.etape.$error.required && formSubmitted]" ng-required="true">
+                        <md-option value="1">{{ "ETAPE_STEP_ONE" | translate }}</md-option>
+                        <md-option value="2">{{ "ETAPE_STEP_TWO" | translate }}</md-option>
+                        <md-option value="3">{{ "ETAPE_SETP_THREE" | translate }}</md-option>
+                    </md-select>
+
+                    <div ng-hide="ck_selected == 1">
+                        <md-autocomplete flex md-selected-item="selectedItem"
+                                         md-search-text="searchText"
+                                         md-items="item in querySearch(searchText, false)"
+                                         md-item-text="item.StepName"
+                                         md-min-length="1"
+                                         placeholder="Search">
+                            <md-item-template>
+                                <span>{{item.WorkflowName}} - </span>
+                                <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.StepName}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+                    </div>
+                    <div ng-hide="ck_selected == 2 || ck_selected == 3">
+                        <md-input-container class="md-icon-float md-block">
+                            <label>{{ "ETAPE_NAME" | translate }}</label>
+                            <input name="flowNewStepName" type="text" ng-model="NewStepName" ng-class="{true: 'invalid'}[addNewStepForm.flowNewStepName.$error.required && formSubmitted]" ng-required="true">
+                        </md-input-container>
+                    </div>
+                </div>
+                <div ng-hide="StepPosition == 1">
+                    <md-autocomplete flex md-selected-item="selectedItemPrevious"
+                                     md-search-text="searchText_2"
+                                     md-items="item in querySearch(searchText_2, true)"
+                                     md-item-text="item.StepName"
+                                     md-min-length="1"
+                                     placeholder="Search">
+                        <md-item-template>
+                            <span>{{item.WorkflowName}} - </span>
+                            <span md-highlight-text="searchText_2" md-highlight-flags="^i">{{item.StepName}}</span>
+                        </md-item-template>
+                    </md-autocomplete>
+
+                </div>
+            </form>    
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button class="md-primary" ng-click="cancel()">
+            {{ "BUTTON_CANCEL" | translate }}
+        </md-button>
+        <md-button class="md-primary" ng-click="ok()">
+            {{ "BUTTON_INSERT" | translate }}
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

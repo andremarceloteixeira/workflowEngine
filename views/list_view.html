@@ -1,0 +1,51 @@
+
+<div layout="column" flex layout-fill ng-cloak>
+    <md-toolbar md-scroll-shrink class="maintoolbar md-primary toolbar-fixed" layout="row" layout-align="space-between center">
+        <div class="md-toolbar-tools grid_0">{{ "TITLE" | translate }}</div>
+        <md-button  href="#/" aria-label="Go Back" style="float:left;">
+            Home
+        </md-button>
+        <md-input-container>
+            <country-directive></country-directive>
+        </md-input-container>
+    </md-toolbar>
+    <md-progress-linear data-loading md-mode="indeterminate"></md-progress-linear>
+</div>
+<div layout="column" flex layout-fill ng-cloak class="content-margin" >
+    <flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash)" ></flash-message>
+    <md-content  flex-sm md-theme="primary" >
+        <section ng-repeat="wfType in GetUniqueType()">
+            <md-subheader class="md-primary">{{ "WORKFLOW_LIST_TYPE" | translate }} {{wfType.TYPE_WORFLOW_DESCRIPTION}} </md-subheader>
+            <md-list layout-padding>
+                <md-list-item class="md-3-line" ng-repeat="item in GetWorkflowToType(wfType.ID_TYPE_WORKFLOW)">
+                    <img ng-src="{{imgPath}}assets/img/placeholder_list.jpeg" class="md-avatar" alt="placeholder">
+                    <div class="md-list-item-text">
+                        <div layout="row" layout-align="space-between center">
+                            <div>
+                                <h3>{{item.NAME_WORKFLOW}}</h3>
+                                <h4>{{item.DESCRIPTION_WORKFLOW}}</h4>
+                                <p>
+                                    {{item.TYPE_WORFLOW_DESCRIPTION}}
+                                </p>
+                            </div>
+                            <div>
+                                <md-button md-no-ink class="md-primary" href="#/details/{{item.ID_WORKFLOW}}">{{ "LIST_DETAILS_BUTTON" | translate }}</md-button>
+                                <md-button md-no-ink class="md-primary" href="#/edit/edit/{{item.ID_WORKFLOW}}">{{ "LIST_MODIFIED_BUTTON" | translate }}</md-button>
+                                <md-button md-no-ink class="md-primary" href="#/clone/clone/{{item.ID_WORKFLOW}}">{{ "LIST_CLONE_BUTTON" | translate }}</md-button>
+                                <md-button md-no-ink class="md-primary" href="" ng-click="deletePopUp(item.ID_WORKFLOW);" >{{ "LIST_DELETE_BUTTON" | translate }}</md-button>
+                            </div>
+                        </div>
+                        <md-divider ></md-divider>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </section>
+    </md-content>
+</div>
+<div layout="column"  layout-align="end" class="dynamicHeight">
+    <button mfb-menu position="br" effect="slidein-spring"
+            active-icon="addStep" resting-icon="addStep"
+            template-url="ng-mfb-menu-md.tpl.html"
+            ng-click="addStep();">
+    </button>
+</div>

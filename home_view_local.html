@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="appWorkflow">
+    <head id="head">
+        <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-8">
+
+
+        <!--Plugins-->
+        <script>
+            var CONFIGURATION = {
+                IMG_PATH: "../",
+                WEBSERVICE_API: "",
+                IMAGE_PATH: "../",
+                WEBSERVICE_PATH: "https://ricardo.agoraplus.fr/ords/elancourt/API_WORKFLOW/",
+                SESSION_ID: "013FE1BA16E29B5B2A1BCA7505532344",
+                LANGS: ["fr", "en", "pt"],
+                LOGIN_DATA: {
+                    USER_NAME: "support",
+                    PASSWORD: "blanQui13"
+                },
+                WEBSERVICE_CALLS: {
+                    GET_WORKFLOW_LIST_ACTION: "GetWorkflowList",
+                    GET_WORKFLOW_EXISTS_ACTION: "GetAllStepAndWorflows",
+                    GET_WORKFLOW_ACTIONS: "GetAllStepActions",
+                    GET_WORKFLOW_IHM: "GetAllStepIHM",
+                    LOAD_STEP_ACTION: "GetStepDetailsToId",
+                    SAVE_STEP: "SetWorkflowAndSteps",
+                    GET_WORKFLOW_USERS: "GetAllUsersAndGroups",
+                    GET_WORKFLOW_TYPES: "GetWorkflowType",
+                    GET_ALL_GROUPS: "GetAllGroups",
+                    AUTENTICATION: "AuthenticationDev",
+                    GET_WORKFLOW_DETAILS_BY_ID: "GetWorkflowDetailsToId",
+                    DELETE: "DeleteWorkflowById",
+                    EDIT_WTF: "EditWorkflowAndSteps",
+                },
+                globals: {
+                    countryDropDown: "../pck_dashboard/views/country_drop_down_view.html",
+                },
+                ROUTES: {
+                    HOME: {
+                        PATH: "/",
+                        TEMPLATE: "views/list_view.html",
+                        CONTROLLER: "workflowListController"
+                    },
+                    NEW_WORKFLOW: {
+                        PATH: "/new",
+                        TEMPLATE: "views/workflowform_view.html",
+                        CONTROLLER: "workflowFormController"
+                    },
+                    EDIT_WORKFLOW: {
+                        PATH: "/edit/:type/:idType",
+                        TEMPLATE: "views/workflowform_view.html",
+                        CONTROLLER: "workflowFormController"
+                    },
+                    CLONE_WORKFLOW: {
+                        PATH: "/clone/:type/:idType",
+                        TEMPLATE: "views/workflowform_view.html",
+                        CONTROLLER: "workflowFormController"
+                    },
+                    DETAILS_WORKFLOW: {
+                        PATH: "/details/:idWorkFlow",
+                        CONTROLLER: "detailsController",
+                        TEMPLATE: "views/details_view.html",
+                    },
+                    DIALOG: {
+                        PATH: "",
+                        TEMPLATE: "views/AddNewStepPopUp_view.html",
+                        CONTROLLER: "AddNewStepPopUpController"
+                    },
+                    DIALOG_IDENTIFY: {
+                        PATH: "",
+                        TEMPLATE: "views/IdentifyStepPopUp_view.html",
+                        CONTROLLER: "IdentifyStepPopUpController"
+                    }
+                }
+            };
+
+        </script>
+        <script type="text/javascript" src="../globals.js"></script>
+        <script src="../assets/libs/angular.min.js"></script>
+        <script src="../assets/libs/angular-animate.min.js"></script>
+        <script src="../assets/libs/angular-aria.min.js"></script>
+        <script src="../assets/libs/angular-messages.min.js"></script>
+        <script src="../assets/libs/angular-route.min.js"></script> 
+        <script src="../assets/libs/angular-material.min.js"></script>
+        <script src="../assets/libs/mfb-directive.js"></script>
+        <script src="../assets/libs/angular-sanitize.min.js"></script>
+        <script src="../assets/libs/angular-translate.min.js"></script>
+        <script src="../assets/libs/angular-cookies.min.js"></script>
+        <script src="../assets/libs/angular-flash.min.js"></script>
+        <script src="../assets/libs/ui-bootstrap-tpls-0.13.0.js"></script>
+        <script src="../assets/libs/vis.js"></script>
+        <script src="../assets/lang/en.js"></script>
+        <script src="../assets/lang/fr.js"></script>
+        <script src="../assets/lang/pt.js"></script>
+
+
+        <script src="app_config.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/css.css">
+        <!--Plugins-->
+        <link rel="stylesheet" type="text/css" ng-href="../assets/css/vis.css">
+        <link rel="stylesheet" type="text/css" ng-href="../assets/css/steps.css">
+        <link rel="stylesheet" type="text/css" ng-href="../assets/css/angular-material.min.css">
+        <link rel="stylesheet" type="text/css" ng-href="../assets/css/material-icons.css">
+        <link rel="stylesheet" type="text/css" ng-href="../assets/css/mfb.css">
+        <link rel="stylesheet" type="text/css" ng-href="../assets/css/angular-flash.min.css">
+        <link rel="stylesheet" type="text/css" ng-href="../assets/css/bootstrap.min.css"/>
+
+
+        <base href="#/">
+
+        <title>{{ "HEAD_TITLE" | translate }}</title>
+        <link rel="icon" type="image/png" ng-href="../assets/img/favicon.png" />
+    </head>
+    <body>
+        <div>
+            <div ng-view></div>
+        </div> 
+        <footer id="footer">
+            <!--Plugins-->
+            <script src="services/apex_service.js"></script>
+            <script src="directives/loading_directive.js"></script>
+            <script src="../pck_dashboard/directives/custom_header.js" type="text/javascript"></script> 
+            <script src="directives/menu_directive.js"></script>
+            <script src="directives/steps_directive.js"></script>
+            <script src="controllers/list_controller.js"></script>
+            <script src="controllers/details_controller.js"></script>
+            <script src="controllers/workflowform_controller.js"></script>
+            <script src="controllers/AddNewStepPopUp_controller.js"></script>
+            <script src="controllers/IdentifyStepPopUp_controller.js"></script>
+        </footer>
+    </body>
+</html>

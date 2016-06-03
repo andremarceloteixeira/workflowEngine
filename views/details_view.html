@@ -1,0 +1,91 @@
+<div layout="column" flex layout-fill ng-cloak>
+    <md-toolbar class="maintoolbar md-primary toolbar-fixed" layout="row" layout-align="space-between center">
+        <div class="md-toolbar-tools grid_0">{{ "TITLE" | translate }}</div>
+                <md-button  href="#/" aria-label="Go Back" style="float:left;">
+            Home
+        </md-button>
+        <md-input-container>
+            <country-directive></country-directive>
+        </md-input-container>
+    </md-toolbar>
+    <md-progress-linear data-loading md-mode="indeterminate"></md-progress-linear>
+</div>
+
+<div layout="column" flex layout-fill ng-cloak class="content-margin">
+    <flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash)" ></flash-message>
+    <div layout="row" layout-align="space-between start" class="StepPopupContainer margins">
+        <div flex="5"></div>
+        <div flex="90" layout="row" id="network" class="network">
+            <div flex="5"></div>
+        </div>            
+        <div flex="5"></div>
+    </div>    
+    <div layout="row" layout-align="space-between start" class="StepPopupContainer">
+        <div flex="15" class="margin-top">
+        </div>
+        <div flex="70" layout-xs="column" ng-cloak>  
+            <h2 class="md-flex">{{"WORKFLOW_INFORMATION"|translate}}</h2>
+            <md-content flex layout-padding>
+                <p><strong>{{"WORKFLOW_NAME"|translate}} : </strong>{{workflowName}}</p>
+                <p><strong>{{"WORKFLOW_DESCRIPTION"|translate}} : </strong>{{workflowDescription}}</p>
+                <p><strong>{{"WORKFLOW_ADMIN"|translate}} : </strong>{{workflowAdmin}}</p>
+                <p><strong>{{"WORKFLOW_TYPE_DESC"|translate}} : </strong>{{workflowType}}</p>
+            </md-content>
+        </div>
+        <div flex="15" class="margin-top">
+        </div>
+    </div>
+    <div layout="row" layout-align="space-between start" class="StepPopupContainer">
+        <div flex="5" class="margin-top">
+        </div>
+        <div flex="90" layout-xs="column" ng-cloak>  
+            <h2 class="md-flex">{{"WORKFLOW_SETPS_INFORMATION"|translate}}</h2>
+            <md-content  flex-sm md-theme="primary" layout-padding>
+                <div>
+                    <input type="text" ng-model="nameFilter" placeholder="filter step" />
+                    <a href="#/details/{{workflowID}}" ng-click="order = 'name'">{{"STEPS_BY_NAME"|translate}}</a>
+                    <a href="#/details/{{workflowID}}" ng-click="order = 'description'">{{"STEPS_BY_DESC"|translate}}</a>
+                    <ul class="grid" style="margin-top: 10px;">
+                        <li ng-repeat="item in StepList| filter: { name: nameFilter } | orderBy: order" class="houver-li">
+                            <p><span><strong>{{item.name}}</strong></span></p>
+                            <p><span>{{item.description}}</span></p>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <accordion close-others="status.oneAtATime">
+                                            <accordion-group ng-repeat="person in  item.people">
+                                                <accordion-heading>
+                                                    <i class="material-icons">&#xE84E;</i> {{person.name}}</accordion-heading>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="col-sm-6">
+                                                            <p><strong>{{"ACTIONS"|translate}}</strong></p>
+                                                            <div ng-repeat="action in person.actions">
+                                                                <p ng-hide="{{!action.selected}}"><i class="material-icons">&#xE0B5;</i>{{action.description}}</p>
+                                                            </div>
+
+                                                        </div>  
+                                                        <div class="col-sm-6">
+                                                            <p><strong>{{"IHM"|translate}}</strong></p>
+                                                            <div ng-repeat="ihm in person.ihms">
+                                                                <p ng-hide="{{!ihm.selected}}"><i class="material-icons">&#xE893;<</i>{{ihm.description}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <p ng-show="person.exclude" style="color:red;">User Excluded</p>
+                                                    </div>
+                                                </div>
+                                            </accordion-group>
+                                        </accordion>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </md-content>
+        </div>
+        <div flex="5" class="margin-top">
+        </div>
+    </div>
+</div>
+

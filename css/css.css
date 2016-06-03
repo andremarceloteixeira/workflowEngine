@@ -1,0 +1,287 @@
+.whiteframeStep{
+    margin: 30px;
+    height: 70px;
+    cursor: pointer;
+}
+/*.ng-invalid {
+    border: 1px solid red;
+}*/
+
+/*Fixed Button*/
+.md-button.md-fab.md-fab-bottom-right {
+    top: auto;
+    right: 20px;
+    bottom: 20px;
+    left: auto;
+    position: fixed !important;
+}
+
+.margin-null {
+    margin:0;
+}
+
+.margins {
+    margin-top: 16px;
+}
+
+.md-toast.error {
+    position: fixed;
+}
+
+#network {
+    height: 310px;
+    border: 1px solid lightgray;
+}
+
+#network-pop {
+    height: 250px;
+    border: 1px solid lightgray;
+}
+
+
+.network {
+    height: 400px !important;
+    border: 1px solid lightgray;
+}
+
+.margin-top {
+    margin-top : 0%;
+}
+
+.margin-left {
+    margin-left: 40%;
+}
+
+.parent-workflow {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.disable-contacts {
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.padding-button {
+    padding-top: 17px;
+}
+
+.div-color {
+    height: 38px;
+    width: 20%;
+}
+
+.md-chip-red {
+    background: red;
+}
+
+.md-chip-green {
+    background: green;
+}
+
+.md-chip-orage {
+    background: orangered;
+}
+
+.autocompleUsersGroups {
+    height: 10%;
+}
+.accordion a{
+    padding: 10px;
+    background: #ddd;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 1px;
+}
+.accordion-content{
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 1px 0;
+}
+
+.actions-ihms-scroll {
+    height: 148px;
+    overflow-y:scroll;
+}
+
+.button {
+    width: 99%;
+}
+
+.people-list-item {
+    border-bottom: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.border-right{
+    border-right : 1px solid #ddd;
+}
+
+.ihms-title {
+    width: 50%;
+}
+.actions-title {
+    width: 50%;
+}
+
+/*
+ *  STYLE 3
+ */
+
+.style-3::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+.style-3::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+.style-3::-webkit-scrollbar-thumb
+{
+    background-color: #cccccc;
+}
+.scrollbar
+{
+    margin-left: 30px;
+    float: left;   
+    height: 108px;
+    max-height: 300px;
+    overflow: auto;
+    margin-top: -8px;
+}
+
+.div-rows {
+    padding-top: 1px !important;
+    padding-bottom: 4px !important;
+}
+.scrollbar2
+{
+    margin-left: 30px;
+    float: left;   
+    height: 87px;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.actions-ihms-font {
+    font-size: 11px;
+}
+
+.md-checkbox.md-checked.green .md-icon {
+    background-color: rgba(0, 255, 0, 0.87);
+}
+
+.iconDetails {
+    margin-left:2%;
+    float:left; 
+    height:60px;
+    width:60px;	
+}
+
+.vertical-divider {
+    border-top-width: 0;
+    border-right-width: 1px;
+    border-right-style: solid;
+    height: 100%;
+}
+
+.row-person {
+    background: rgb(232,232,232); 
+}
+
+.row-person:hover {
+    background-color: "#FFCCFF";
+}
+
+.ihms {
+    width: 45%;
+}
+
+.actions-ihms-font-row {
+    font-size: 11px;
+}
+
+
+
+h5 {
+    margin-bottom: 10px
+}
+
+md-checkbox {
+    margin-bottom: 0 !important;
+}
+
+.row-check-box {
+        margin-bottom: 2px !important;
+}
+
+md-card md-card-content {
+    padding: 4px !important;
+}
+
+md-option:hover {
+  background: silver;  
+}
+
+.invalid {
+    border-bottom: 1px solid red !important;
+}
+
+/*
+ * Toolbar fixed
+ */
+.toolbar-fixed {
+   position: fixed; 
+   z-index: 9999; 
+}
+
+div.content-margin {
+    margin-top: 70px !important;
+}
+
+.custom-top {
+    top: 71px !important;
+}
+
+.back {
+	float: right;
+}
+
+/* Override vis styling*/
+div.vis-network div.vis-navigation div.vis-button.vis-zoomIn {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAwElEQVR4Ac3NPYoqYRCG0YP2OrrRNYzcRFBwV4ruw2By8WdJ0xqq8TiRUgNfcEGhRCbyVPo+lHc3sXN2c7Y19pzKp7i7pUquzL9N1ToaM5eSpCZl/gGAQUlGEjthCgjAXNhInIX6IegJR4mb0EH8P7rC9dmHBhCAvnCS2Aqzh2AhrCXGwsUAAP/8CEOpZUnmerr6FmW+IldZirtbCQcNuZGNo6uTtSEOwl7jZY290Kp5PWn/lny9nlBr8yBLau/rF9+yXcOGb3knAAAAAElFTkSuQmCC") !important;
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-zoomOut {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAu0lEQVR4Ac3NPWpCYRCG0YO6jnvRNUTSCAruStF9WKQXf5YUtVTrmEqZkFtEvmJCTOWZ9n0Yz25s6+zmbGPE7zreRHELHblm/mGi0lKbujRJatzMX9z1m2QosRUmSjNhLXEWKqWucJS4CS3Ez9EWrvIPaqWecJLYCFOlubCSGAkXfXevPoWB1KJJZrraeubNfCmn850UtxQOajlDa0dXJysDHIS92p/V9sJO9Uiy+1/y/khS2WVBnlSe1xe+OVnHtnHRAAAAAABJRU5ErkJggg==") !important;
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-up {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAWklEQVR4Ae3LUQqAMAwE0TmP59F6G8m9W6gQkIQiLv1U3N+dx4dn2Fze6dhUnonOm+dNkciLg10SzysFHKCI52xwgSAqD/BAjMoKGSRycLMFBhCP2gD4wet3AqyEQlKENMZpAAAAAElFTkSuQmCC") !important;
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-down {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAU0lEQVR4Ae3LsQFAUBAE0W1IPaCZUzcANjKQ4u+FN08f3qgxAVwGwB9Yo04Fgnr+xBHEnJgYOB8NiJQGlDOpDDhnsgDOmayAcyb7cc7keW4S+uwmPN5ChtgQR5wAAAAASUVORK5CYII=") !important;
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-left {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAOUlEQVR4AWMYxqABCElS/p/hN4MWacpDSFMeSlPlYaQo/0OScnyQYg0IJ4XjcsLI0KJFmpa64Zt3AdTaQlFOlKYFAAAAAElFTkSuQmCC") !important;
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-right {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAAOUlEQVR4AWMYxqCRoYEU5boMfxj+k6YlgnQtkXTREkW6lmjcWv7jhQ3kayDspGGrnPLE1wCEwxYAABNmQoikBfhoAAAAAElFTkSuQmCC") !important;
+}
+
+div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAABF0lEQVR4Ad3SM7yYUQwH0FObU21jqdu5tm2bD/tUbvVULTW2N9W2bdvWbX/f8nT34mRK/skW/5XNLv+udQrIrpdLSdJQDscFx5SWR1drnXRBhhRlkSIImuU6SNarOih4Z68MNwWvDUFK7GC50qq474MZigDaOCGYjBRN5ZAP+3zUWlZF7PJV4yTPpZ0gRU7lfbBB1EqfFZfbah8VFLHPCTETBHVEHHZQzAhBIxEbPZdXbvP9VFLEWEFXORV0xyFRRT10XVnZzRP0FTEYnXx3Rj0AhS0SbEIzdeRw3EL09943O6SbZomHgg0Ka+ZV7JeChahqhWeC4JtdupOsh/hBcoI8yquuEEjWYwdV1UuqgOwqSeYK+1v9AoDzXHhPQsXaAAAAAElFTkSuQmCC") !important;
+}
+
+div.vis-network div.vis-navigation div.vis-button:hover {
+    box-shadow: none !important;
+}

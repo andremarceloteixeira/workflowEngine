@@ -1,0 +1,267 @@
+<div layout="column" flex layout-fill ng-cloak>
+    <md-toolbar class="maintoolbar md-primary toolbar-fixed" layout="row" layout-align="space-between center">
+        <div class="md-toolbar-tools grid_0">{{ "TITLE" | translate }}</div>
+        <md-button  href="#/" aria-label="Go Back" style="float:left;">
+            Home
+        </md-button>
+        <md-input-container>
+            <country-directive></country-directive>
+        </md-input-container>
+    </md-toolbar>
+    <md-progress-linear data-loading md-mode="indeterminate"></md-progress-linear>
+</div>
+
+<div layout="column" flex layout-fill ng-cloak class="content-margin">
+    <flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash)" ></flash-message>
+    <form name="workflow">
+        <div layout="row" layout-align="space-between start" class="StepPopupContainer margins">
+            <div flex="5"></div>
+            <div flex="90" layout="row">
+                <div flex="40">
+                    <div id="worflow-data">
+                        <div ng-hide="stepsCurrent.length == 0" layout="column">
+                            <md-input-container flex="30" class="md-icon-float md-block"  layout-align-sm>
+                                <label>{{ "WORKFLOWNAME" | translate }}</label>
+                                <input type="text" ng-model="workflowName" required maxlength="50">
+                                <!--<div ng-messages="workflowName.$error">
+                                    <div ng-message="required">Please enter a value for this field.</div>
+                                </div>-->
+                            </md-input-container>
+                            <md-input-container flex="70" class="md-icon-float md-block">
+                                <label>{{ "WORKFLOWDESCRIPTION" | translate }}</label>
+                                <input type="text" ng-model="workflowDescription" required maxlength="50">
+                            </md-input-container>
+                            <md-input-container flex="70" class="md-icon-float md-block">
+                                <label>{{ "WORKFLOW_ADMINS" | translate }}</label>
+                                <md-select ng-model="workflowAdmin">
+                                    <md-select-label>{{ "WORKFLOW_ADMINS" | translate }}</md-select-label>
+                                    <md-option ng-repeat="n in workflowAdmins" ng-value="{{n}}"  ng-selected="n.id === workflowAdmin.id">{{ n.name}} </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex="70" class="md-icon-float md-block">
+                                <label>{{ "WORKFLOW_TYPE" | translate }}</label>
+                                <md-select ng-model="workflowType">
+                                    <md-select-label>{{ "WORKFLOW_TYPE" | translate }}</md-select-label>
+                                    <md-option ng-repeat="n in workflowTypes" ng-value="{{n}}" ng-selected="n.id === workflowType.id">{{ n.description}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+                <div flex="5"></div>
+                <div flex="60">
+                    <div id="network"></div>
+                    <!--i class="material-icons">zoom_in</i-->
+                </div>
+            </div>            
+            <div flex="5"></div>
+        </div>    
+        <div layout="row" layout-align="space-between start" class="StepPopupContainer">
+            <div flex="15" class="margin-top">
+                <h4 class="margin-left" ng-hide="nextStep.length == 0" layout-align="center end" flex="15">{{"PREVIOUS"|translate}}</h4>
+                <md-whiteframe class="whiteframeStep md-whiteframe-8dp md-primary" layout layout-align="center center"
+                               ng-repeat="nextStep in PreviousSteps()" ng-click="ChangeSelectedIndex(nextStep.id)">
+                    <span>{{nextStep.name}}</span>
+                </md-whiteframe>
+            </div>
+            <div flex="70" layout-xs="column" ng-cloak>  
+                <h4 ng-hide="nextStep.length == 0" style="float: left;" layout-align="center end" flex="15">{{"ACTUAL"|translate}}</h4>
+                <md-toolbar flex class="md-primary">
+                    <div class="md-toolbar-tools">
+                        <h2 class="md-flex">{{"ETAPE_TITLE"|translate}} : {{ActualStep.name}}</h2>
+                    </div>
+                </md-toolbar>
+                <md-content flex layout-padding>
+                    <div layout="column">
+                        <md-input-container class="md-icon-float md-block">
+                            <label>{{"NAME"|translate}}</label>
+                            <input name="actualStepName" maxlength="50" type="text" ng-change="changeNetworkSetpName()" ng-model="ActualStep.name" ng-disabled="ActualStep.isDisabled" ng-class="{true: 'invalid'}[workflow.actualStepName.$error.required && formSubmitted]" ng-required="true">
+                        </md-input-container>
+                        <md-input-container class="md-icon-float md-block">
+                            <label>{{"DESC"|translate}}</label>
+                            <input name="actualStepDescription" maxlength="50" type="text" ng-model="ActualStep.description" ng-disabled="ActualStep.isDisabled" ng-class="{true: 'invalid'}[workflow.actualStepDescription.$error.required && formSubmitted]" ng-required="true" >
+                        </md-input-container>
+                    </div>
+                </md-content>
+                <md-toolbar flex class="md-primary">
+                    <div class="md-toolbar-tools">
+                        <md-input-container md-no-float class="md-accent" flex="90" style="padding-bottom:0px;margin-left:25px; margin-top: 25px;">
+                            <md-icon style="color:wheat" class="material-icons">&#xE8B6;</md-icon>
+                            <md-autocomplete
+                                ng-model="UserGroupInsert"
+                                md-min-length="4"
+                                md-search-text="searchText"
+                                md-items="item in getUsers(searchText)"
+                                md-item-text="item.name"
+                                md-autoselect="true"
+                                md-select-on-match="true"
+                                md-no-cache="true"
+                                md-require-match="true"
+                                md-search-text-change="searchTextChange(searchText)"
+                                md-selected-item-change="selectedItemChange(item)"
+                                ng-disabled="ActualStep.isDisabled"
+                                placeholder="Search">
+                                <md-item-template>
+                                    <span class="item-title">
+                                        <i class="material-icons">{{item.image == "people" ? "&#xE55A;" : "&#xE886;"}}</i>
+                                        <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+                                    </span>
+                                </md-item-template>
+                                <md-not-found>
+                                    {{ "NOT_FOUND" | translate }} "{{searchText}}".
+                                </md-not-found>
+                            </md-autocomplete>
+                            <script>
+                                var itemSelected = item;
+                            </script>
+                        </md-input-container>
+                        <md-button class="md-icon-button" aria-label="Add User" ng-click="addNewPeople(item);">
+                            <i class="material-icons">&#xE89C;</i>
+                            <md-tooltip>
+                                {{ "ADD_USER_TO_LIST" | translate }}
+                            </md-tooltip>
+                        </md-button>
+                        <span flex></span>
+                        <md-button class="md-icon-button" aria-label="Masse Operations" ng-click="ShowHide()" ng-disabled="ActualStep.isDisabled">
+                            <i class="material-icons">&#xE89D;</i>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-content flex layout-padding>
+                    <div layout="column">
+                        <md-input-container class="md-icon-float md-block" ng-show = "IsVisible" ng-disabled="ActualStep.isDisabled">
+                            <h4>{{ "BULK_OPERATIONS" | translate }}</h4>
+                            <md-divider></md-divider>
+                            <div layout="row">
+                                <div layout="column" class="actions-title">
+                                    <p style="text-align: center;"> <strong>{{"ACTIONS"|translate}}</strong> 
+                                    <md-button ng-click="applyActionsSelectedUsers();">
+                                        <i class="material-icons">&#xE86C;</i>
+                                        <md-tooltip>
+                                            {{ "APPLY_ACTIONS_TEXT" | translate }}
+                                        </md-tooltip>
+                                    </md-button>
+                                    <md-button  ng-click="unSelectedActionsSelectedUsers();">
+                                        <i class="material-icons">&#xE14C;</i>
+                                        <md-tooltip>
+                                            {{ "APPLY_ACTIONS_UNSELECTED" | translate }}
+                                        </md-tooltip>
+                                    </md-button></p>
+                                    <div flex="50" class="scrollbar style-3">
+                                        <md-content flex layout-padding>
+                                            <div ng-repeat="action in Actions" layout="column" class="div-rows">
+                                                <md-checkbox ng-model="action.selected" class="md-warn md-secondary md-checkbox-divs">
+                                                    <strong class="actions-ihms-font">{{ action.description}}</strong>
+                                                </md-checkbox>
+                                            </div>
+                                        </md-content>
+                                    </div>
+                                </div>
+                                <div layout="column" class="ihms-title">
+                                    <p style="text-align: center;"><strong>{{"IHM"|translate}}</strong>
+                                    <md-button  ng-click="applyIHMSSelectedUsers();">
+                                        <i class="material-icons">&#xE86C;</i>
+                                        <md-tooltip>
+                                            {{ "APPLY_IHMS_TEXT" | translate }}
+                                        </md-tooltip>
+                                    </md-button>
+                                    <md-button ng-click="unSelectedIhmsSelectedUsers();">
+                                        <i class="material-icons">&#xE14C;</i>
+                                        <md-tooltip>
+                                            {{ "APPLY_IHMS_UNSELECTED" | translate }}
+                                        </md-tooltip>
+                                    </md-button>
+                                    </p>
+                                    <div flex="50" class="scrollbar style-3"> 
+                                        <md-content flex layout-padding>
+                                            <div ng-repeat="ihm in IHMs" layout="column">
+                                                <md-checkbox ng-model="ihm.selected" class="md-primary md-secondary md-checkbox-divs">
+                                                    <strong class="actions-ihms-font">{{ ihm.description}}</strong>
+                                                </md-checkbox>
+                                            </div>
+                                        </md-content>
+                                    </div>
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <div ng-repeat="person in ActualStep.people" class="row-person">
+                            <md-card>
+                                <md-card-content>
+                                    <div layout="row" layout-wrap>
+                                        <md-checkbox ng-checked="person.selected" ng-click="personSelected(person)" ng-hide="ActualStep.isDisabled">
+                                            <span><strong>{{ person.name}}</strong></span>
+                                        </md-checkbox>
+                                    </div>
+                                    <div layout="row" layout-wrap>
+                                        <div flex="10">
+                                            <img ng-src="{{imgPath}}assets/img/user_placeholder.png" width="143" height="86">
+                                            <div style="text-align: center;">    
+
+                                                <span ng-click="exclueThisStep(person)"  flex class="md-primary" ng-hide="person.exclude || ActualStep.isDisabled" ng-disabled="ActualStep.isDisabled">
+                                                    <i class="material-icons">&#xE888;</i>
+                                                    <md-tooltip>
+                                                        {{ "EXCLUDE_STEP" | translate }}
+                                                    </md-tooltip>
+                                                </span>
+                                                <span ng-click="includeThisStep(person)"  flex class="md-primary" ng-hide="!person.exclude || ActualStep.isDisabled" ng-disabled="ActualStep.isDisabled">
+                                                    <i class="material-icons">&#xE876;</i>
+                                                    <md-tooltip>
+                                                        {{ "INCLUDE_STEP" | translate }}
+                                                    </md-tooltip>
+                                                </span>
+                                                <span ng-click="removePeopleList(person)" flex class="md-warn" ng-disabled="ActualStep.isDisabled" ng-hide="ActualStep.isDisabled">
+                                                    <i class="material-icons">&#xE872;</i>
+                                                    <md-tooltip>
+                                                        {{ "DELETE_ROW" | translate }}
+                                                    </md-tooltip>
+                                                </span>
+                                                <div>
+                                                    <md-checkbox ng-model="person.is_cc" ng-disabled="ActualStep.isDisabled" class="md-warn row-check-box">{{ "IS_CC" | translate }}</md-checkbox>
+                                                    <md-tooltip md-direction="top">
+                                                        {{ "IS_CC" | translate }}
+                                                    </md-tooltip>                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <md-divider class="vertical-divider"></md-divider>
+                                        <div flex="45">
+                                            <h5 class="md-flex">{{"ACTIONS"|translate}}</h5>
+                                            <div class="scrollbar2 style-3">
+                                                <div ng-repeat="actionPerson in person.actions" layout="column">
+                                                    <md-checkbox ng-model="actionPerson.selected" ng-disabled="person.exclude || ActualStep.isDisabled" class="md-warn row-check-box">
+                                                        <strong class="actions-ihms-font-row">{{ actionPerson.description}}</strong>
+                                                    </md-checkbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <md-divider class="vertical-divider"></md-divider>
+                                        <div  flex="40">
+                                            <h5 class="md-flex">{{"IHM"|translate}}</h5>
+                                            <div class="scrollbar2 style-3">
+                                                <div ng-repeat="ihmPerson in person.ihms" layout="column">
+                                                    <md-checkbox ng-model="ihmPerson.selected" ng-disabled="person.exclude || ActualStep.isDisabled" class="md-primary row-check-box">
+                                                        <strong class="actions-ihms-font-row">{{ ihmPerson.description}}</strong>
+                                                    </md-checkbox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </md-card-content>
+                            </md-card>
+                        </div>
+                    </div>
+                </md-content>
+            </div>
+            <div flex="15" class="margin-top">
+                <h4 class="margin-left" ng-hide="nextStep.length == 0" layout-align="center end" flex="15">{{"NEXT"|translate}}</h4>
+                <md-whiteframe class="whiteframeStep md-whiteframe-8dp md-primary" layout layout-align="center center"
+                               ng-repeat="nextStep in NextSteps()" ng-click="ChangeSelectedIndex(nextStep.id)">
+                    <span>{{nextStep.name}}</span>
+                </md-whiteframe>
+            </div>
+
+        </div>
+    </form>
+</div>
+<menu-directive></menu-directive>
+

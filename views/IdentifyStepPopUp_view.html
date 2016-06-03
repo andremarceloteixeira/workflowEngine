@@ -1,0 +1,57 @@
+<md-dialog>
+    <form name="identifyStepForm">
+        <md-toolbar  class="md-primary">
+            <div class="md-toolbar-tools md-primary">
+                <h2 translate>POP_UP_IDENTIFY</h2>
+                <!--<h2 translate="VARIABLE_REPLACEMENT" translate-values="{ name: 'PascalPrecht' }"></h2>-->
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-icon="close" aria-label="android "></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <flash-message duration="5000" show-close="true" on-dismiss="myCallback(flash)" ></flash-message>
+        <md-dialog-content style="min-width:700px;height:480px; padding:20px 20px 20px 20px;">
+            <div layout="column">
+                <div flex="90" layout="row" id="network-pop" class="network-pop">
+                    <div flex="5"></div>
+                </div>       
+                <br/>
+                <md-input-container class="md-icon-float md-block">
+                    <label>{{ "IDENTIFY_STEP_ONE" | translate }}</label>
+                    <md-content  class="md-padding autocomplete" layout="column">
+                        <md-contact-chips  ng-model="First" ng-class="{true: 'invalid'}[identifyStepForm.flowName.$error.required && formSubmitted]" ng-required="true"
+                                          md-contacts="querySearch($query, true)"
+                                          md-contact-name="name"
+                                          md-require-match="true"
+                                          md-highlight-flags="i"
+                                          filter-selected="true"
+                                          placeholder="Select first step">
+                        </md-contact-chips>
+                    </md-content>
+                </md-input-container> 
+                <md-input-container class="md-icon-float md-block">
+                    <label>{{ "IDENTIFY_STEP_LAST" | translate }}</label>
+                    <md-content  class="md-padding autocomplete" layout="column">
+                        <md-contact-chips name="last"  ng-model="Last" ng-class="{true: 'invalid'}[identifyStepForm.last.$error.required && formSubmitted]" ng-required="true"
+                                          md-contacts="querySearch($query, false)"
+                                          md-contact-name="name"
+                                          md-require-match="true"
+                                          md-highlight-flags="i"
+                                          filter-selected="true"
+                                          placeholder="Select last steps">
+                        </md-contact-chips>
+                    </md-content>
+                </md-input-container>   
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button class="md-primary" ng-click="cancel()">
+                {{ "BUTTON_CANCEL" | translate }}
+            </md-button>
+            <md-button class="md-primary" ng-click="ok()">
+                {{ "BUTTON_SAVE" | translate }}
+            </md-button>
+        </md-dialog-actions>
+    </form>  
+</md-dialog>

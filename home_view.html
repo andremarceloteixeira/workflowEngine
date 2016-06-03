@@ -1,0 +1,130 @@
+htp.p('
+<!DOCTYPE html>
+<html lang="fr" ng-app="appWorkflow">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-8">
+        <!--Plugins-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>   
+        <script src="'||pck_constants.c_url_image||'/plugins/assets/libs/mfb-directive.js"></script>
+        <script src="'||pck_constants.c_url_image||'/plugins/assets/libs/angular-sanitize.min.js"></script>
+        <script src="'||pck_constants.c_url_image||'/plugins/assets/libs/angular-translate.min.js"></script>
+        <script src="'||pck_constants.c_url_image||'/plugins/assets/libs/angular-cookies.min.js"></script>
+        <script src="'||pck_constants.c_url_image||'/plugins/assets/libs/angular-flash.min.js"></script>
+        <script src="'||pck_constants.c_url_image||'/plugins/assets/libs/ui-bootstrap-tpls-0.13.0.js"></script>
+        <script src="'||pck_constants.c_url_image||'/plugins/assets/libs/vis.js"></script>
+        <script src="'||pck_constants.c_url_image||'/plugins/assets/lang/en.js"></script>
+        <script src="'||pck_constants.c_url_image||'/plugins/assets/lang/fr.js"></script>
+        <script src="'||pck_constants.c_url_image||'/plugins/assets/lang/pt.js"></script>');
+        htp.p('<script>
+            var SESSION_ID = "";
+            var CONFIGURATION = {
+                IMG_PATH: "'||pck_constants.c_url_image||'/plugins/",
+                WEBSERVICE_API: "",
+                IMAGE_PATH: "'||pck_constants.c_url_image||'/plugins/",
+                WEBSERVICE_PATH: "https://ricardo.agoraplus.fr/ords/elancourt/API_WORKFLOW/",
+                SESSION_ID: "013FE1BA16E29B5B2A1BCA7505532344",
+                LANGS: ["fr", "en", "pt"],
+                LOGIN_DATA: {
+                    USER_NAME: "",
+                    PASSWORD: ""
+                },
+                WEBSERVICE_CALLS: {
+                    GET_WORKFLOW_LIST_ACTION: "GetWorkflowList",
+                    GET_WORKFLOW_EXISTS_ACTION: "GetAllStepAndWorflows",
+                    GET_WORKFLOW_ACTIONS: "GetAllStepActions",
+                    GET_WORKFLOW_IHM: "GetAllStepIHM",
+                    LOAD_STEP_ACTION: "GetStepDetailsToId",
+                    SAVE_STEP: "SetWorkflowAndSteps",
+                    GET_WORKFLOW_USERS: "GetAllUsersAndGroups",
+                    GET_WORKFLOW_TYPES: "GetWorkflowType",
+                    GET_ALL_GROUPS: "GetAllGroups",
+                    AUTENTICATION: "AuthenticationDev",
+                    GET_WORKFLOW_DETAILS_BY_ID: "GetWorkflowDetailsToId",
+                    DELETE: "DeleteWorkflowById",
+                    EDIT_WTF: "EditWorkflowAndSteps",
+                },
+                ROUTES: {
+                    HOME: {
+                        PATH: "/",
+                        TEMPLATE: "pck_workflow.list_view",
+                        CONTROLLER: "workflowListController"
+                    },
+                    NEW_WORKFLOW: {
+                        PATH: "/new",
+                        TEMPLATE: "pck_workflow.workflowform_view",
+                        CONTROLLER: "workflowFormController"
+                    },
+                    EDIT_WORKFLOW: {
+                        PATH: "/edit/:type/:idType",
+                        TEMPLATE: "pck_workflow.workflowform_view",
+                        CONTROLLER: "workflowFormController"
+                    },
+                    CLONE_WORKFLOW: {
+                        PATH: "/clone/:type/:idType",
+                        TEMPLATE: "pck_workflow.workflowform_view",
+                        CONTROLLER: "workflowFormController"
+                    },
+                    DETAILS_WORKFLOW: {
+                        PATH: "/details/:idWorkFlow",
+                        CONTROLLER: "detailsController",
+                        TEMPLATE: "'||pck_constants.c_url_website || pck_constants.c_url_dad||'/pck_workflow.details_view",
+                    },
+                    DIALOG: {
+                        PATH: "",
+                        TEMPLATE: "'||pck_constants.c_url_website || pck_constants.c_url_dad||'/pck_workflow.AddNewStepPopUp_view",
+                        CONTROLLER: "AddNewStepPopUpController"
+                    },
+                    DIALOG_IDENTIFY: {
+                        PATH: "",
+                        TEMPLATE: "'||pck_constants.c_url_website || pck_constants.c_url_dad||'/pck_workflow.IdentifyStepPopUp_view",
+                        CONTROLLER: "IdentifyStepPopUpController"
+                    },
+                },
+                globals: {
+                    countryDropDown: "'||pck_constants.c_url_website || pck_constants.c_url_dad||'/pck_dashboard.country_drop_down_view",
+                }
+            };
+        </script>');
+        htp.p('');
+
+
+
+        htp.p('<style>');
+            pck_workflow.css;
+            htp.p('</style>');
+        htp.p('<link rel="stylesheet" type="text/css" ng-href="'||pck_constants.c_url_image||'/plugins/assets/css/vis.css"/>
+        <link rel="stylesheet" type="text/css" ng-href="'||pck_constants.c_url_image||'/plugins/assets/css/angular-material.min.css"/>
+        <link rel="stylesheet" type="text/css" ng-href="'||pck_constants.c_url_image||'/plugins/assets/css/material-icons.css"/>
+        <link rel="stylesheet" type="text/css" ng-href="'||pck_constants.c_url_image||'/plugins/assets/css/mfb.css"/>
+        <link rel="stylesheet" type="text/css" ng-href="'||pck_constants.c_url_image||'/plugins/assets/css/angular-flash.min.css"/>
+        <link rel="stylesheet" type="text/css" ng-href="'||pck_constants.c_url_image||'/plugins/assets/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" ng-href="'||pck_constants.c_url_image||'/plugins/assets/css/steps.css"/>
+        <base href="#/">
+
+        <title>{{ "HEAD_TITLE" | translate }}</title>
+        <link rel="icon" type="image/png" ng-href="'||pck_constants.c_url_image||'/plugins/assets/img/favicon.png" />
+    </head>
+    <body>
+        <div>
+            <div ng-view></div>
+        </div> 
+        <footer id="footer">
+            <script type="text/javascript" src="'||pck_constants.get_url_website || pck_constants.get_url_dad||'/pck_workflow.app_config"></script>
+            <script type="text/javascript" src="'||pck_constants.get_url_website || pck_constants.get_url_dad||'/pck_workflow.apex_service"></script>
+            <script type="text/javascript" src="'||pck_constants.get_url_website || pck_constants.get_url_dad||'/pck_workflow.loading_directive"></script>
+            <script type="text/javascript" src="'||pck_constants.get_url_website || pck_constants.get_url_dad||'/pck_dashboard.custom_header"></script>
+            <script type="text/javascript" src="'||pck_constants.get_url_website || pck_constants.get_url_dad||'/pck_workflow.steps_directive"></script>
+            <script type="text/javascript" src="'||pck_constants.get_url_website || pck_constants.get_url_dad||'/pck_workflow.menu_directive"></script>
+            <script type="text/javascript" src="'||pck_constants.get_url_website || pck_constants.get_url_dad||'/pck_workflow.list_controller"></script>
+            <script type="text/javascript" src="'||pck_constants.get_url_website || pck_constants.get_url_dad||'/pck_workflow.workflowform_controller"></script>
+            <script type="text/javascript" src="'||pck_constants.get_url_website || pck_constants.get_url_dad||'/pck_workflow.details_controller"></script>
+            <script type="text/javascript" src="'||pck_constants.get_url_website || pck_constants.get_url_dad||'/pck_workflow.AddNewStepPopUp_controller"></script>
+            <script type="text/javascript" src="'||pck_constants.get_url_website || pck_constants.get_url_dad||'/pck_workflow.IdentifyStepPopUp_controller"></script>
+        </footer>
+    </body>
+</html>');
